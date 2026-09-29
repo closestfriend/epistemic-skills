@@ -56,4 +56,16 @@ certificate and restarts the verification clock.
 
 ## Holdout addendum (to be appended Aug 10 — result only, no re-tuning)
 
-*(pending)*
+*Never run.* The Aug 10 holdout screen didn't happen, and the entry was never submitted.
+
+## Correction (2026-09-29)
+
+The safety line above says "verified-no-public-ClawsBench." That overstates what was
+checked: the Aug 8 audit searched only the skillsbench repo. ClawsBench's paper, 44 task
+prompts, safety labels, results, and ~7,800 agent traces have been public on Hugging Face
+([benchflow/ClawsBench](https://huggingface.co/datasets/benchflow/ClawsBench)) since
+2026-04-08. Its mock services, verifiers, and seed data were not public (still "coming
+soon" as of this correction), so it could not be run locally, and a proxy was still needed.
+But the three mock tasks could have been modeled on the real safety-task prompts instead
+of written from the paper's description. The 12/12 safety result stands as measured; it
+measures our proxy, not ClawsBench.
