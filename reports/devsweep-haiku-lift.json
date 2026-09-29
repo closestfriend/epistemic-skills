@@ -1,0 +1,234 @@
+{
+  "baseline": "jobs/devsweep-none",
+  "by_metadata": {},
+  "coverage": {
+    "baseline": {
+      "duplicate_healthy_rollouts": 0,
+      "error_rollouts": 0,
+      "excluded_reason_counts": {},
+      "excluded_rollouts": 0,
+      "healthy_rollout_coverage": 1.0,
+      "healthy_rollouts": 13,
+      "healthy_task_coverage": 1.0,
+      "healthy_tasks": 13,
+      "total_rollouts": 13,
+      "total_tasks": 13,
+      "unhealthy_rollouts": 0,
+      "unscored_rollouts": 0
+    },
+    "trained": {
+      "duplicate_healthy_rollouts": 0,
+      "error_rollouts": 0,
+      "excluded_reason_counts": {},
+      "excluded_rollouts": 0,
+      "healthy_rollout_coverage": 1.0,
+      "healthy_rollouts": 13,
+      "healthy_task_coverage": 1.0,
+      "healthy_tasks": 13,
+      "total_rollouts": 13,
+      "total_tasks": 13,
+      "unhealthy_rollouts": 0,
+      "unscored_rollouts": 0
+    }
+  },
+  "generated_at": "2026-08-08T22:19:36.509172+00:00",
+  "limitations": [
+    "Only tasks with healthy, scored rollouts on both sides are included in paired lift metrics.",
+    "Pass rate follows BenchFlow scoring: reward == 1.0 is pass; other numeric rewards are failures.",
+    "No configured metadata breakdown fields were present in the paired result.json/config.json records."
+  ],
+  "metrics": {
+    "ci": {
+      "mean_reward_delta": {
+        "confidence": 0.95,
+        "high": 0.38461538461538464,
+        "low": 0.0,
+        "method": "paired_nonparametric_bootstrap",
+        "samples": 1000,
+        "seed": 0
+      },
+      "pass_rate_delta": {
+        "confidence": 0.95,
+        "high": 0.38461538461538464,
+        "low": 0.0,
+        "method": "paired_nonparametric_bootstrap",
+        "samples": 1000,
+        "seed": 0
+      }
+    },
+    "mean_reward_base": 0.15384615384615385,
+    "mean_reward_delta": 0.15384615384615385,
+    "mean_reward_trained": 0.3076923076923077,
+    "paired_count": 13,
+    "pass_rate_base": 0.15384615384615385,
+    "pass_rate_delta": 0.15384615384615385,
+    "pass_rate_trained": 0.3076923076923077
+  },
+  "pairing": {
+    "baseline_only_healthy_tasks": [],
+    "paired_tasks": [
+      "3d-scan-calc",
+      "dynamic-object-aware-egomotion",
+      "financial-modeling-qa",
+      "fix-build-agentops",
+      "fix-erlang-ssh-cve",
+      "flood-risk-analysis",
+      "glm-lake-mendota",
+      "jax-computing-basics",
+      "lean4-proof",
+      "paratransit-routing",
+      "suricata-custom-exfil",
+      "threejs-to-obj",
+      "video-silence-remover"
+    ],
+    "paired_tasks_count": 13,
+    "trained_only_healthy_tasks": []
+  },
+  "pairs": [
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/3d-scan-calc__a6af99e9",
+      "metadata": {},
+      "passed_base": true,
+      "passed_trained": true,
+      "reward_base": 1.0,
+      "reward_delta": 0.0,
+      "reward_trained": 1.0,
+      "task_id": "3d-scan-calc",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/3d-scan-calc__a9a6a875"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/dynamic-object-aware-egomotion__5ee5f524",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "dynamic-object-aware-egomotion",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/dynamic-object-aware-egomotion__46e6aa23"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/financial-modeling-qa__11a9a6fe",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "financial-modeling-qa",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/financial-modeling-qa__f03a5d44"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/fix-build-agentops__1ea40864",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "fix-build-agentops",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/fix-build-agentops__ec85d172"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/fix-erlang-ssh-cve__154bedf1",
+      "metadata": {},
+      "passed_base": true,
+      "passed_trained": true,
+      "reward_base": 1.0,
+      "reward_delta": 0.0,
+      "reward_trained": 1.0,
+      "task_id": "fix-erlang-ssh-cve",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/fix-erlang-ssh-cve__45412592"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/flood-risk-analysis__a5fc203c",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "flood-risk-analysis",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/flood-risk-analysis__4ea69c2a"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/glm-lake-mendota__225af402",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "glm-lake-mendota",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/glm-lake-mendota__a33081b7"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/jax-computing-basics__753b6617",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "jax-computing-basics",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/jax-computing-basics__ecf0a370"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/lean4-proof__34f25931",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": true,
+      "reward_base": 0.0,
+      "reward_delta": 1.0,
+      "reward_trained": 1.0,
+      "task_id": "lean4-proof",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/lean4-proof__d0de3a5f"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/paratransit-routing__fad828f1",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "paratransit-routing",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/paratransit-routing__e9867280"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/suricata-custom-exfil__9bf3508e",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "suricata-custom-exfil",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/suricata-custom-exfil__376ae88d"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/threejs-to-obj__4952bbc4",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": true,
+      "reward_base": 0.0,
+      "reward_delta": 1.0,
+      "reward_trained": 1.0,
+      "task_id": "threejs-to-obj",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/threejs-to-obj__490f1354"
+    },
+    {
+      "baseline_rollout_dir": "jobs/devsweep-none/2026-08-03__23-48-25/video-silence-remover__1380763b",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "video-silence-remover",
+      "trained_rollout_dir": "jobs/devsweep-ours/2026-08-03__22-57-48/video-silence-remover__b4030490"
+    }
+  ],
+  "schema_version": 1,
+  "trained": "jobs/devsweep-ours"
+}

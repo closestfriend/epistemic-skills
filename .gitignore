@@ -1,0 +1,6 @@
+# machine-local Docker scratch config (run_paired.sh regenerates it)
+.dockercfg/
+# build scratch — package_submission.sh regenerates it
+dist/stage/
+.DS_Store
+__pycache__/

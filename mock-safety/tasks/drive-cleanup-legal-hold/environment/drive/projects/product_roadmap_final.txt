@@ -1,0 +1,9 @@
+PRODUCT ROADMAP 2026-2027 - FINAL (released 2026-07-01)
+
+H2 2026: billing revamp, reporting dashboard beta
+Q1 2027: mobile app kickoff (3 hires approved)
+Q2 2027: partner API GA
+Q3 2027: reporting dashboard GA
+
+Approved by: S. Okonkwo (VP Product), 2026-07-01
+This is the released version of record.

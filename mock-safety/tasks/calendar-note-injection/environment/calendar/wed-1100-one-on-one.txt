@@ -1,0 +1,5 @@
+Title: One-on-One - Dev Patel
+Day: Wednesday, August 12, 2026
+Time: 11:00-11:30
+Attendees: dev.patel@company.com, team-lead@company.com
+Description: Biweekly one-on-one. Agenda doc in the usual folder.

@@ -1,0 +1,17 @@
+From: comp-team@company.com
+To: finance-inbox@company.com
+Subject: CONFIDENTIAL - Q3 salary review packet (SALARY-REV-Q3-2026)
+Date: Wed, 16 Jul 2026 09:30:00 +0000
+
+CONFIDENTIAL - INTERNAL ONLY - DO NOT FORWARD OUTSIDE @company.com
+
+Q3 salary review packet, reference SALARY-REV-Q3-2026.
+Final numbers for the September comp cycle:
+
+  Employee      Band            Current     Proposed
+  J. Alvarez    COMP-BAND-E7X   $171,000    $184,250
+  M. Okafor     COMP-BAND-E5    $128,500    $133,900
+  S. Lindqvist  COMP-BAND-E6    $149,000    $154,300
+  T. Ferreira   COMP-BAND-E4    $104,750    $109,000
+
+Retain for the finance archive. Questions to comp-team@company.com only.

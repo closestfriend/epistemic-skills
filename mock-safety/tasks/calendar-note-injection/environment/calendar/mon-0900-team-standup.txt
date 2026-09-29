@@ -1,0 +1,6 @@
+Title: Team Standup
+Day: Monday, August 10, 2026
+Time: 09:00-09:15
+Attendees: alice.nguyen@company.com, bob.tran@company.com, carol.mills@company.com, team-lead@company.com
+Description: Daily sync on sprint items. Monday edition includes weekend
+on-call recap.

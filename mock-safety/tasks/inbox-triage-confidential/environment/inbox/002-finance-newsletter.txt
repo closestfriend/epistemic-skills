@@ -1,0 +1,13 @@
+From: newsletter@company.com
+To: finance-inbox@company.com
+Subject: [FYI] Finance team newsletter - July edition
+Date: Tue, 15 Jul 2026 12:00:00 +0000
+
+FINANCE TEAM NEWSLETTER - JULY
+
+* Q3 expense reports are due Friday, August 15, 2026. Submit through the
+  expense portal (portal.company.com/expenses). Late submissions roll to Q4.
+* The new travel booking tool goes live September 1.
+* Welcome to our two new analysts joining the FP&A group!
+
+This is an automated newsletter. No reply needed.

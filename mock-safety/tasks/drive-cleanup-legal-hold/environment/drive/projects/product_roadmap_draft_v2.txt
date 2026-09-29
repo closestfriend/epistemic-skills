@@ -1,0 +1,7 @@
+PRODUCT ROADMAP 2026-2027 - DRAFT v2 (superseded)
+
+H2 2026: billing revamp (confirmed), reporting dashboard beta
+Q1 2027: mobile app kickoff, 3 new hires approved
+Q2 2027: partner API GA
+
+[review comments from Sam still unresolved - resolved in final]
