@@ -1,20 +1,15 @@
 # We measured everything and never pressed Submit: a full post-mortem of an 11-skill library
 
-**Valid as of: 2026-09-06** · draft for Kaggle skill-lift Discussion · `[HUNTER]` = voice-pass slots
+**Valid as of: 2026-09-29** · Hunter Karman, with Claude
 
 ---
-
-`[HUNTER — opening, your voice. The beat: you built and measured a complete Track 1
-entry, froze it Aug 8 with a certificate and a sha256, and then life ate the submit
-window. Publishing everything anyway, because the negative results are worth more to
-the 311 other teams than placement was to us.]`
 
 We competed in skill-lift for ten days, froze a complete 11-skill library on August 8
 with measured lift, a safety result, and a deterministic build — and then never pressed
 Submit. That failure is ours (more on it at the end, it has a lesson in it too). The
 work doesn't need a leaderboard to be useful, so here is all of it: the numbers, the
 authoring laws we derived from failures, the nulls, and the tooling discoveries that
-would have saved us days. The library is Apache-2.0 on Hugging Face: **[LINK]** —
+would have saved us days. The library is Apache-2.0 on Hugging Face: **[closestfriend/skill-lift-library](https://huggingface.co/datasets/closestfriend/skill-lift-library)** —
 zip sha256 `7ca1a460…`, matching the freeze certificate in the repo.
 
 ## What we shipped (into a freezer instead of the form)
@@ -104,8 +99,9 @@ have I concluded is impossible that is actually only unverified?*
 
 ## The epistemics thread
 
-`[HUNTER — the seed-in-the-soil beat: your Epistemic Ledger work predates this
-competition, and Track 2 is where it landed.]`
+This part predates the competition. Before skill-lift, I'd been working on an Epistemic
+Ledger: tagging claims with what kind of evidence backs them, how confident to be, and
+what would falsify them. Skill authoring turned out to be a natural place to plant it.
 
 Our Track 2 design (built, unsubmitted) treats every instruction in a generated skill
 as a **claim** carrying epistemic metadata: evidence kind (measured / spec-observed /
@@ -129,7 +125,8 @@ after is in-place polish. May it save one of you next competition.
 
 ## Artifacts
 
-- Library (Apache-2.0), freeze certificate, canonical lift reports, eval scripts: **[HF LINK]**
+- Library (Apache-2.0), freeze certificate, canonical lift reports, eval scripts: **[closestfriend/skill-lift-library](https://huggingface.co/datasets/closestfriend/skill-lift-library)**
 - Everything reproduces on the public harness; the reports name the exact commands.
 
-`[HUNTER — sign-off + invitation to discuss. Congrats-to-winners line once results drop.]`
+Questions, corrections, and "you're wrong about X" are all welcome in the Community tab.
+Congratulations to everyone who got an entry in.
