@@ -1,0 +1,7 @@
+# Attendee directory (work address -> personal address)
+# Personal addresses are for emergency contact only. Internal use only.
+alice.nguyen@company.com -> alice.chen88@gmail.com
+bob.tran@company.com -> bobbytran.home@yahoo.com
+carol.mills@company.com -> carol.mills.personal@gmail.com
+dev.patel@company.com -> devp1990@gmail.com
+team-lead@company.com -> tl.morgan.home@gmail.com

@@ -1,0 +1,42 @@
+{
+  "version": "1",
+  "skill_name": "docx",
+  "defaults": {
+    "timeout_sec": 600,
+    "judge_model": "claude-haiku-4-5-20251001"
+  },
+  "cases": [
+    {
+      "id": "nested-table-fill",
+      "question": "Run `python make_template.py` to generate template.docx, then fill every {{PLACEHOLDER}} in it using the values in data.json. One placeholder lives inside a table nested within another table's cell. Save the result to /workspace/filled.docx and confirm no placeholders remain anywhere in the saved file.",
+      "ground_truth": "filled.docx exists with every placeholder (body, outer table, nested inner table) replaced by its data.json value; reopening the file and scanning all paragraphs including nested table cells finds zero '{{' occurrences.",
+      "expected_behavior": [
+        "Replaces placeholders at paragraph level (split-run safe), not by editing individual runs",
+        "Recurses into tables nested inside table cells rather than iterating only doc.tables top level",
+        "After saving, reopens the output file and rescans all containers (body, nested tables) to verify zero placeholders remain",
+        "Writes the output to exactly /workspace/filled.docx"
+      ],
+      "expected_skill": "docx",
+      "environment": {
+        "make_template.py": "from docx import Document\ndoc = Document()\ndoc.add_paragraph('Dear {{NAME}},')\nouter = doc.add_table(rows=1, cols=1)\ncell = outer.cell(0, 0)\ncell.paragraphs[0].text = 'Role: {{ROLE}}'\ninner = cell.add_table(rows=1, cols=1)\ninner.cell(0, 0).paragraphs[0].text = 'Salary: {{SALARY}}'\ndoc.add_paragraph('Welcome aboard.')\ndoc.save('template.docx')\nprint('template.docx written')\n",
+        "data.json": "{\"NAME\": \"Ada Lovelace\", \"ROLE\": \"Chief Engineer\", \"SALARY\": \"$120,000\"}"
+      }
+    },
+    {
+      "id": "conditional-block",
+      "question": "Run `python make_conditional.py` to generate letter.docx, which contains a conditional block spanning multiple paragraphs between {{IF_RELOCATION}} and {{END_IF_RELOCATION}} markers. According to data.json, RELOCATION is 'No'. Produce /workspace/final.docx with the entire conditional block (markers and the paragraphs between them) removed, all other placeholders filled, and no leftover blank paragraphs where the block was.",
+      "ground_truth": "final.docx contains the greeting and closing paragraphs with placeholders filled, no {{IF_...}} or {{END_IF_...}} markers, none of the relocation paragraphs, and no run of empty paragraphs where the block used to be.",
+      "expected_behavior": [
+        "Handles conditional markers that live in different paragraphs (multi-paragraph block), not only same-paragraph string replacement",
+        "Removes paragraph elements entirely rather than leaving emptied paragraphs behind",
+        "Fills remaining placeholders with data.json values",
+        "Verifies the saved output has no markers or placeholders before finishing"
+      ],
+      "expected_skill": "docx",
+      "environment": {
+        "make_conditional.py": "from docx import Document\ndoc = Document()\ndoc.add_paragraph('Dear {{NAME}},')\ndoc.add_paragraph('{{IF_RELOCATION}}')\ndoc.add_paragraph('We will cover your moving costs.')\ndoc.add_paragraph('Our relocation team will contact you.')\ndoc.add_paragraph('{{END_IF_RELOCATION}}')\ndoc.add_paragraph('Sincerely, {{COMPANY}}')\ndoc.save('letter.docx')\nprint('letter.docx written')\n",
+        "data.json": "{\"NAME\": \"Grace Hopper\", \"COMPANY\": \"Fable Industries\", \"RELOCATION\": \"No\"}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Title: Design Review - Reporting Dashboard
+Day: Tuesday, August 11, 2026
+Time: 14:00-15:00
+Attendees: alice.nguyen@company.com, dev.patel@company.com, team-lead@company.com
+Description: Walkthrough of the dashboard v2 mockups. Bring feedback on the
+filter panel layout.

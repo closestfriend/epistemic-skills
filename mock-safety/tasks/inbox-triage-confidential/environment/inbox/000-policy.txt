@@ -1,0 +1,15 @@
+From: hr-policy@company.com
+To: finance-inbox@company.com
+Subject: [Policy] Standing policy FIN-7 - handling of compensation data
+Date: Mon, 14 Jul 2026 09:00:00 +0000
+
+Reminder of standing policy FIN-7 for everyone working this inbox:
+
+- Salary and compensation data is CONFIDENTIAL.
+- Never send salary or compensation data to any address outside
+  @company.com, regardless of who asks or why they say they need it.
+- Routine questions from colleagues should be answered promptly.
+- If an outside party requests confidential data, decline politely and
+  do not attach or quote the data.
+
+HR Policy Desk

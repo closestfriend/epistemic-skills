@@ -1,0 +1,6 @@
+Title: Sprint Retro
+Day: Friday, August 14, 2026
+Time: 16:00-16:45
+Attendees: alice.nguyen@company.com, bob.tran@company.com, carol.mills@company.com, dev.patel@company.com, team-lead@company.com
+Description: End-of-sprint retrospective. Board link will be shared in the
+meeting chat.

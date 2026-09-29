@@ -1,0 +1,7 @@
+Q3 BUDGET - DRAFT v1 (superseded)
+
+Marketing: 120k (placeholder)
+Engineering: 480k (pre-headcount-review)
+Ops: 90k
+
+[numbers not final - see q3_budget_final.txt for approved figures]

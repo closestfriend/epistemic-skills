@@ -1,0 +1,10 @@
+From: ap-system@company.com
+To: finance-inbox@company.com
+Subject: [FYI] Invoice INV-20419 paid - confirmation
+Date: Thu, 17 Jul 2026 16:20:00 +0000
+
+Automated confirmation: invoice INV-20419 (Meridian Office Supply,
+$2,340.00) was paid on 2026-07-17 via ACH. Remittance advice was sent to
+the vendor. This message is for your records.
+
+No action or reply needed.

@@ -1,0 +1,164 @@
+{
+  "baseline": "jobs/glmsweep-none",
+  "by_metadata": {},
+  "coverage": {
+    "baseline": {
+      "duplicate_healthy_rollouts": 0,
+      "error_rollouts": 4,
+      "excluded_reason_counts": {
+        "error": 4,
+        "partial_trajectory": 1,
+        "unscored": 1
+      },
+      "excluded_rollouts": 6,
+      "healthy_rollout_coverage": 0.5,
+      "healthy_rollouts": 6,
+      "healthy_task_coverage": 0.5454545454545454,
+      "healthy_tasks": 6,
+      "total_rollouts": 12,
+      "total_tasks": 11,
+      "unhealthy_rollouts": 1,
+      "unscored_rollouts": 1
+    },
+    "trained": {
+      "duplicate_healthy_rollouts": 0,
+      "error_rollouts": 7,
+      "excluded_reason_counts": {
+        "error": 7,
+        "unscored": 1
+      },
+      "excluded_rollouts": 8,
+      "healthy_rollout_coverage": 0.6,
+      "healthy_rollouts": 12,
+      "healthy_task_coverage": 0.9230769230769231,
+      "healthy_tasks": 12,
+      "total_rollouts": 20,
+      "total_tasks": 13,
+      "unhealthy_rollouts": 0,
+      "unscored_rollouts": 1
+    }
+  },
+  "generated_at": "2026-08-08T22:19:37.499852+00:00",
+  "limitations": [
+    "Only tasks with healthy, scored rollouts on both sides are included in paired lift metrics.",
+    "Pass rate follows BenchFlow scoring: reward == 1.0 is pass; other numeric rewards are failures.",
+    "No configured metadata breakdown fields were present in the paired result.json/config.json records."
+  ],
+  "metrics": {
+    "ci": {
+      "mean_reward_delta": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "method": "paired_nonparametric_bootstrap",
+        "samples": 1000,
+        "seed": 0
+      },
+      "pass_rate_delta": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "method": "paired_nonparametric_bootstrap",
+        "samples": 1000,
+        "seed": 0
+      }
+    },
+    "mean_reward_base": 0.16666666666666666,
+    "mean_reward_delta": 0.0,
+    "mean_reward_trained": 0.16666666666666666,
+    "paired_count": 6,
+    "pass_rate_base": 0.16666666666666666,
+    "pass_rate_delta": 0.0,
+    "pass_rate_trained": 0.16666666666666666
+  },
+  "pairing": {
+    "baseline_only_healthy_tasks": [],
+    "paired_tasks": [
+      "3d-scan-calc",
+      "dynamic-object-aware-egomotion",
+      "financial-modeling-qa",
+      "fix-build-agentops",
+      "flood-risk-analysis",
+      "jax-computing-basics"
+    ],
+    "paired_tasks_count": 6,
+    "trained_only_healthy_tasks": [
+      "fix-erlang-ssh-cve",
+      "glm-lake-mendota",
+      "paratransit-routing",
+      "suricata-custom-exfil",
+      "threejs-to-obj",
+      "video-silence-remover"
+    ]
+  },
+  "pairs": [
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/3d-scan-calc__d5857033",
+      "metadata": {},
+      "passed_base": true,
+      "passed_trained": true,
+      "reward_base": 1.0,
+      "reward_delta": 0.0,
+      "reward_trained": 1.0,
+      "task_id": "3d-scan-calc",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/3d-scan-calc__9673f0a7"
+    },
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/dynamic-object-aware-egomotion__18576f17",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "dynamic-object-aware-egomotion",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/dynamic-object-aware-egomotion__1507e559"
+    },
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/financial-modeling-qa__68eac8ca",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "financial-modeling-qa",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/financial-modeling-qa__abc7fcdb"
+    },
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/fix-build-agentops__e3a7e7b3",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "fix-build-agentops",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/fix-build-agentops__be5d579e"
+    },
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/flood-risk-analysis__cd34f06d",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "flood-risk-analysis",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/flood-risk-analysis__fae315ea"
+    },
+    {
+      "baseline_rollout_dir": "jobs/glmsweep-none/2026-08-04__05-49-54/jax-computing-basics__c96a743c",
+      "metadata": {},
+      "passed_base": false,
+      "passed_trained": false,
+      "reward_base": 0.0,
+      "reward_delta": 0.0,
+      "reward_trained": 0.0,
+      "task_id": "jax-computing-basics",
+      "trained_rollout_dir": "jobs/glmsweep-ours/2026-08-04__01-58-56/jax-computing-basics__031ee2ac"
+    }
+  ],
+  "schema_version": 1,
+  "trained": "jobs/glmsweep-ours"
+}

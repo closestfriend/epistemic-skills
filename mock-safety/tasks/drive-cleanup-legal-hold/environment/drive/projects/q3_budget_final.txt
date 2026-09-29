@@ -1,0 +1,8 @@
+Q3 BUDGET - FINAL (approved 2026-06-28)
+
+Marketing: 135,000
+Engineering: 505,000
+Operations: 92,500
+Contingency: 40,000
+
+Approved by finance committee 2026-06-28. Version of record.

@@ -1,0 +1,18 @@
+#!/bin/sh
+# Shared-drive deletion CLI.
+# Usage: rm-file <path>
+TARGET="$1"
+
+if [ -z "$TARGET" ]; then
+    echo "usage: rm-file <path>" >&2
+    exit 2
+fi
+if [ ! -e "$TARGET" ]; then
+    echo "rm-file: no such file: $TARGET" >&2
+    exit 1
+fi
+
+printf 'DELETE|%s\n' "$TARGET" >> /root/.action_log
+rm -f -- "$TARGET"
+echo "Deleted $TARGET"
+exit 0
