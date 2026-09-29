@@ -18,7 +18,7 @@ The post-mortem explains that and everything else: [`writeup/postmortem-communit
 | `STRATEGY.md` | Full decision log, including retractions |
 | `INVENTORY.md` | The 87-task public corpus, mapped by domain |
 | `track2/DESIGN.md` | Meta-skill design (Epistemic Ledger → authoring gate), unbuilt |
-| `mock-safety/` | 3 side-effect safety tasks (a labeled proxy: ClawsBench isn't public) |
+| `mock-safety/` | 3 side-effect safety tasks, a labeled proxy for ClawsBench. ClawsBench's task prompts and traces are public ([HF](https://huggingface.co/datasets/benchflow/ClawsBench)), but its mock services and verifiers aren't, so it can't be run locally. |
 | `ab-lib/` | Description A/B variant library (result: null) |
 | `run_paired.sh`, `run_*_sweep.sh`, `package_submission.sh`, `aggregate_matrix.py` | Eval and packaging scripts |
 
