@@ -1,31 +1,40 @@
 """
-Epistemic Linter: Formal enforcement of the 6 Authoring Laws discovered
-during the Agent Skill Lift campaign.
+Epistemic Linter: Formal enforcement of the 6 Authoring Laws and Track 2
+Epistemic Ledger calibration rules (Boundary-Timidity Guard & Anti-Disclaimer Gate).
 """
 
-import os
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple
 
 from .models import SkillMetadata, SkillReport, EpistemicRuleResult
 
 
 class EpistemicLinter:
     """
-    Validates skills against empirical laws of causal agent lift.
+    Validates skills against empirical laws of causal agent lift and epistemic calibration.
     """
 
     WORD_BUDGET_TARGET = 900
     WORD_BUDGET_HARD_CAP = 1100
+    BOUNDARY_TIMIDITY_MAX_RATIO = 0.25
+
+    BANNED_DISCLAIMERS = (
+        "may not always work",
+        "might not work",
+        "use with caution",
+        "results may vary",
+        "not guaranteed to work",
+    )
+
+    CONDUCT_SKILLS = {"task-discipline", "scope-safety"}
 
     def __init__(self, target_word_budget: int = 900):
         self.target_word_budget = target_word_budget
 
     def parse_frontmatter(self, content: str) -> Tuple[Optional[SkillMetadata], str]:
         """
-        Parses YAML frontmatter without requiring PyYAML dependency.
-        Falls back to PyYAML if installed.
+        Parses YAML frontmatter (including multi-line block scalars) without requiring PyYAML.
         """
         if not content.startswith("---"):
             return None, content
@@ -37,34 +46,38 @@ class EpistemicLinter:
         raw_yaml = parts[1].strip()
         body = parts[2].strip()
 
-        meta_dict = {}
-        # Try PyYAML if available
+        meta_dict: Dict[str, str] = {}
         try:
             import yaml
-            meta_dict = yaml.safe_load(raw_yaml) or {}
+            loaded = yaml.safe_load(raw_yaml) or {}
+            if isinstance(loaded, dict):
+                meta_dict = {str(k): str(v) for k, v in loaded.items() if v is not None}
         except Exception:
-            # Clean lightweight fallback parser for key: value
+            current_key: Optional[str] = None
             for line in raw_yaml.splitlines():
-                line = line.strip()
-                if not line or line.startswith("#"):
+                stripped = line.strip()
+                if not stripped or stripped.startswith("#"):
                     continue
-                if ":" in line:
+                if not line.startswith((" ", "\t")) and ":" in line:
                     k, v = line.split(":", 1)
-                    k = k.strip()
-                    v = v.strip().strip('"').strip("'")
-                    meta_dict[k] = v
+                    current_key = k.strip()
+                    v_clean = v.strip().strip('"').strip("'")
+                    meta_dict[current_key] = "" if v_clean in ("|", ">", "|-", ">-") else v_clean
+                elif current_key:
+                    meta_dict[current_key] = (meta_dict[current_key] + " " + stripped).strip()
 
-        name = meta_dict.get("name", "")
-        desc = meta_dict.get("description", "")
+        name = meta_dict.get("name", "").strip()
+        desc = meta_dict.get("description", "").strip()
+        desc_lower = desc.lower()
 
         has_positive = any(
-            trigger in desc.lower()
-            for trigger in ["use for", "use when", "read this first", "use whenever"]
+            trigger in desc_lower
+            for trigger in ["use for", "use when", "read this first", "use whenever", "relevant when"]
         )
         has_negative = any(
-            neg in desc.lower()
-            for neg in ["not for", "not needed for", "not applicable", "never use"]
-        )
+            neg in desc_lower
+            for neg in ["not for", "not needed for", "not applicable", "never use", "do not use", "don't use"]
+        ) or (name in self.CONDUCT_SKILLS and "conflicts with the task" in body.lower())
 
         metadata = SkillMetadata(
             name=name,
@@ -84,24 +97,32 @@ class EpistemicLinter:
         skill_name = path.parent.name if path.name == "SKILL.md" else path.stem
 
         metadata, body = self.parse_frontmatter(content)
+        if metadata and metadata.name:
+            skill_name = metadata.name
+
         words = len(content.split())
         lines = len(content.splitlines())
 
-        # Extract code blocks
         code_blocks = re.findall(r"```[a-zA-Z0-9_-]*\n(.*?)```", content, re.DOTALL)
         code_line_count = sum(len(b.splitlines()) for b in code_blocks)
 
-        has_applicability = bool(
-            re.search(r"##\s+Applicability", content, re.IGNORECASE)
+        app_match = re.search(
+            r"^##\s+Applicability[^\n]*\n(.*?)(?=^##\s+|\Z)",
+            body,
+            re.MULTILINE | re.DOTALL | re.IGNORECASE,
         )
+        has_applicability = app_match is not None
         has_verification = bool(
-            re.search(r"##\s+(Verify|Output\s+contract|Verification)", content, re.IGNORECASE)
-            or "verify" in content.lower()
+            re.search(
+                r"^##\s+(Verify|Output\s+contract|Verification|Step\s+\d+\s+[—-]\s+prove|One-way\s+doors:\s+verify|Report\s+what\s+actually\s+happened)",
+                body,
+                re.MULTILINE | re.IGNORECASE,
+            )
         )
 
         rules: List[EpistemicRuleResult] = []
 
-        # Rule 1: Frontmatter presence and schema
+        # Rule E001: Frontmatter presence and schema
         if metadata and metadata.name and metadata.description:
             rules.append(
                 EpistemicRuleResult(
@@ -122,7 +143,7 @@ class EpistemicLinter:
                 )
             )
 
-        # Rule 2: Frontmatter Dual-Trigger (Positive + Negative boundaries)
+        # Rule E002: Frontmatter Dual-Trigger (Positive + Negative boundaries)
         if metadata:
             if metadata.has_positive_trigger and metadata.has_negative_boundary:
                 rules.append(
@@ -130,7 +151,7 @@ class EpistemicLinter:
                         rule_id="E002",
                         name="trigger_surface_boundaries",
                         passed=True,
-                        message="Description specifies both when-to-use AND negative boundary ('Not for')",
+                        message="Description specifies both positive trigger and negative/override boundary",
                     )
                 )
             else:
@@ -138,7 +159,7 @@ class EpistemicLinter:
                 if not metadata.has_positive_trigger:
                     missing.append("positive trigger ('Use for...' / 'Use when...')")
                 if not metadata.has_negative_boundary:
-                    missing.append("negative boundary ('Not for...' / 'Not needed for...')")
+                    missing.append("negative boundary ('Not for...' / 'Do not use...')")
                 rules.append(
                     EpistemicRuleResult(
                         rule_id="E002",
@@ -149,7 +170,7 @@ class EpistemicLinter:
                     )
                 )
 
-        # Rule 3: Word Budget
+        # Rule E003: Word Budget
         if words <= self.target_word_budget:
             rules.append(
                 EpistemicRuleResult(
@@ -180,9 +201,8 @@ class EpistemicLinter:
                 )
             )
 
-        # Rule 4: Executable Snippets vs Prose Hints
-        # Non-discipline skills should contain concrete code blocks
-        is_conduct_skill = skill_name in ["task-discipline", "scope-safety"]
+        # Rule E004: Executable Snippets vs Prose Hints
+        is_conduct_skill = skill_name in self.CONDUCT_SKILLS
         if is_conduct_skill or len(code_blocks) >= 1:
             rules.append(
                 EpistemicRuleResult(
@@ -203,14 +223,50 @@ class EpistemicLinter:
                 )
             )
 
-        # Rule 5: Applicability & Fallback Boundary
-        if has_applicability or is_conduct_skill:
+        # Rule E005: Applicability & Operational Fallback Boundary + Track 2 Calibration Gate
+        if has_applicability:
+            app_text = app_match.group(1) if app_match else ""
+            body_words = max(1, len(body.split()))
+            app_words = len(app_text.split())
+            unquoted_app = re.sub(r'["“”\'].*?["“”\']|`.*?`', "", app_text.lower())
+            found_disclaimer = next((d for d in self.BANNED_DISCLAIMERS if d in unquoted_app), None)
+
+            if found_disclaimer:
+                rules.append(
+                    EpistemicRuleResult(
+                        rule_id="E005",
+                        name="applicability_fallback_boundary",
+                        passed=False,
+                        message=f"Banned vague disclaimer '{found_disclaimer}' in Applicability; use observable condition + fallback",
+                        severity="error",
+                    )
+                )
+            elif body_words > 100 and (app_words / body_words) > self.BOUNDARY_TIMIDITY_MAX_RATIO:
+                rules.append(
+                    EpistemicRuleResult(
+                        rule_id="E005",
+                        name="applicability_fallback_boundary",
+                        passed=False,
+                        message=f"Boundary-timidity violation: Applicability is {app_words}/{body_words} words ({app_words/body_words:.0%} > 25%)",
+                        severity="error",
+                    )
+                )
+            else:
+                rules.append(
+                    EpistemicRuleResult(
+                        rule_id="E005",
+                        name="applicability_fallback_boundary",
+                        passed=True,
+                        message="Explicit operational applicability and fallback path declared",
+                    )
+                )
+        elif is_conduct_skill:
             rules.append(
                 EpistemicRuleResult(
                     rule_id="E005",
                     name="applicability_fallback_boundary",
                     passed=True,
-                    message="Explicit applicability conditions and failure fallback path declared",
+                    message="Conduct skill boundary declared",
                 )
             )
         else:
@@ -224,14 +280,14 @@ class EpistemicLinter:
                 )
             )
 
-        # Rule 6: Output Verification Step
+        # Rule E006: Output Verification Step
         if has_verification:
             rules.append(
                 EpistemicRuleResult(
                     rule_id="E006",
                     name="verification_enforcement",
                     passed=True,
-                    message="Verification instructions / output contract present",
+                    message="Explicit verification steps / output contract present",
                 )
             )
         else:
@@ -240,7 +296,7 @@ class EpistemicLinter:
                     rule_id="E006",
                     name="verification_enforcement",
                     passed=False,
-                    message="Missing explicit output verification steps before declaring completion",
+                    message="Missing explicit output verification section before declaring completion",
                     severity="warning",
                 )
             )

@@ -1,106 +1,115 @@
-# Epistemic Skills
+# Epistemic Skills (`skill-lift`)
 
 [![CI](https://github.com/closestfriend/skill-lift/actions/workflows/ci.yml/badge.svg)](https://github.com/closestfriend/skill-lift/actions)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
 [![Measured Lift: +15.4pp](https://img.shields.io/badge/Measured_Lift-+15.4pp-success.svg)](reports/)
-[![Skills: 11](https://img.shields.io/badge/Skills-11-orange.svg)](library/skills/)
+[![Skills: 11 + 1 Meta](https://img.shields.io/badge/Skills-11_Static_+_1_Meta-orange.svg)](library/skills/)
 
-**Epistemic Skills** is an empirical agent skill library, linter, and deterministic compiler for AI coding agents. 
+**Epistemic Skills** is an empirical agent skill library, meta-skill (`skill-creator`), linter, and deterministic packager for AI coding agents.
 
-Born out of the Kaggle [BenchFlow – Agent Skill Lift](https://www.kaggle.com/competitions/skill-lift) campaign, this repository moves agent skill engineering away from "prompt vibes" into an **empirical science of causal lift backed by deterministic test harnesses and Epistemic Ledgers**.
+Built during the Kaggle [BenchFlow – Agent Skill Lift](https://www.kaggle.com/competitions/skill-lift) campaign, this repository moves `SKILL.md` authoring from prompt intuition to an **empirical discipline of causal lift, per-axis trajectory autopsy, and Epistemic Ledger claim gating**.
+
+- **Post-Mortem & Empirical Findings**: [`writeup/postmortem-community.md`](writeup/postmortem-community.md)
+- **Track 1 Static Freeze Certificate**: [`FREEZE-CERTIFICATE.md`](FREEZE-CERTIFICATE.md) (`dist/submission-v02.zip`, SHA256 `7ca1a460…`)
+- **Track 2 Meta-Skill Design & Epistemic Ledger**: [`track2/DESIGN.md`](track2/DESIGN.md) & [`track2/meta/skill-creator/SKILL.md`](track2/meta/skill-creator/SKILL.md)
+- **Hugging Face Dataset**: [`closestfriend/skill-lift-library`](https://huggingface.co/datasets/closestfriend/skill-lift-library)
 
 ---
 
-## 📊 Measured Benchmark Results
+## Measured Benchmark Results
 
-Evaluated on the official BenchFlow test harness with paired bootstrap analysis ($n=1000$):
+Evaluated on the official BenchFlow harness with `bench eval compare-lift` (paired bootstrap, $n=1000$):
 
-| Benchmark & Model | Baseline | With Epistemic Skills | Lift / Delta | Verification |
+| Benchmark & Model | Baseline (`no-skill`) | With Epistemic Skills | Lift / Delta | Causal Verification |
 |---|---:|---:|---:|---|
-| **13-Task Dev Sweep** (Claude Haiku 4.5) | 15.4% | **30.8%** | **+15.4pp** | 95% CI [+0.0%, +38.5%] |
-| **Offer Letter Generator** (`docx`, Haiku) | 0/3 | **3/3** | **+100%** | Recursive walker snippet verbatim |
-| **Offer Letter Generator** (`docx`, GLM 5.1) | 0/2 | **2/2** | **+100%** | Cross-vendor identical causal lift |
-| **PowerPoint Formatting** (`pptx`, Haiku) | 0/2 | **4/5** | **+80%** | Bullets 5/5, Font-style 5/5 |
-| **Efficiency Sweep** (GPT-5.4-mini) | 13–16 calls | **6–7 calls** | **~2× Faster** | 2.5 min vs 3.7 min runtime |
-| **Safety Invariants** (3 side-effect tasks) | 12/12 PASS | **12/12 PASS** | **0 Violations** | Zero over-refusals |
+| **13-Task Stratified Dev Sweep** (Claude Haiku 4.5) | 15.4% | **30.8%** | **+15.4pp** | 95% CI `[+0.0%, +38.5%]` (`reports/devsweep-haiku-lift.md`) |
+| **Offer Letter Generator** (`docx`, Haiku 4.5) | 0/3 | **3/3** | **+100%** | Recursive `all_paragraphs` walker snippet used verbatim |
+| **Offer Letter Generator** (`docx`, GLM 5.1) | 0/2 | **2/2** | **+100%** | Cross-vendor transfer with identical causal fingerprint |
+| **PowerPoint Reference Formatting** (`pptx`, Haiku 4.5) | 0/2 | **Bullets 5/5, Font 5/5, Ref 4/5** | **Per-axis conversion** | XML `a:buAutoNum` snippet + free-dimension geometry rule |
+| **Frontier Efficiency** (GPT-5.4-mini) | 13–16 calls (3.7m) | **6–7 calls (2.5m)** | **~2× Faster** | Ceiling pass rate both arms; ~50% fewer tool calls |
+| **Off-Domain Sweep** (13 tasks, GLM 5.1) | 16.7% | **16.7%** | **0 Harm** | Inert off-domain under full-context skill injection |
+| **Safety Invariants** (3 side-effect tasks) | 12/12 PASS | **12/12 PASS** | **0 Violations** | Zero policy violations and zero over-refusals |
 
 ---
 
-## 🏛️ The 6 Authoring Laws
+## The 6 Empirical Authoring Laws
 
-Every skill in this library conforms to the empirical authoring laws purchased through paired evaluation failures:
+Derived from paired evaluation failures and trajectory autopsies (`STRATEGY.md`):
 
 1. **Weak models convert executable snippets, not prose hints.**  
-   Models fail when given abstract advice; they succeed when given copy-paste-runnable recursive algorithms with calibrated defaults.
-2. **Applicability & Fallback Boundaries are mandatory.**  
-   Every skill must declare what it is NOT for and provide an immediate, lightweight fallback path when high-level tooling breaks.
-3. **Dual-Trigger Frontmatter.**  
-   The description must define both positive triggers (`Use when...`) and negative boundaries (`Not for...`) to eliminate misfires.
-4. **Strict Token Budget ($\le 900$ words).**  
-   Prune philosophical preamble; keep column mappings, quirks, and boundary assertions.
-5. **Inline Verification Postconditions.**  
-   Mandatory verification steps before the agent declares a task complete.
-6. **Safety at Reversible Boundaries.**  
-   Side-effect skills (email, deletions, permissions) stop at the reversible boundary unless explicit authorization is verified.
+   Describing nested-table recursion in prose scored `0/3` on `docx`; replacing prose with the runnable `all_paragraphs(doc)` generator converted `0/3 -> 3/3` on Haiku and `0/2 -> 2/2` on GLM 5.1.
+2. **Operational boundaries, never vague disclaimers (plus the Boundary-Timidity Guard).**  
+   18 of 84 public benchmark tasks regress under curated skills because they prescribe a single heavyweight pipeline without boundaries. Every skill must declare observable stop/fallback conditions (`If <condition>: <lightweight fallback>`) while keeping `## Applicability & fallback` under 20–25% of body words so the skill stays decisive. Vague disclaimers (*"may not always work"*) are banned.
+3. **False-Specificity Guard (Free-Dimension Law).**  
+   Never prescribe an unconditional single-axis fix (*"shrink font to fit"* scored `0/6` on `pptx` v3/v4 when the task pinned font size at 16pt and left shape width free). State conditional rules keyed to whichever dimension the spec leaves free.
+4. **Artifact-Noun Trigger Surface.**  
+   Agents match `description` on concrete artifact nouns (`.xlsx`, `.docx`, `ffmpeg`, `scipy.optimize`), not activity verbs (`build-repair`, `tabular-data`). Frontmatter `description` must specify both positive triggers (`Use when...`) and negative scope limits (`Not for...`).
+5. **Strict Token Budget ($\le 900$ words).**  
+   Focused procedural skills (`+19.0pp` to `+21.5pp`) beat comprehensive manuals (`+0.7pp`) and must survive harnesses that inject all mounted skills into every prompt.
+6. **Verify as Mandatory Task Steps + Reread Spec Before Strengthening.**  
+   Agents skip verification framed as optional advice; frame `## Verify before finishing` as numbered task steps with runnable assertions. When a retry fails, reread the task spec and verifier before strengthening compliance language.
 
 ---
 
-## 📚 Library Inventory
+## Repository Structure
 
-```
-library/skills/
-├── build-repair/           # Diagnosing and fixing broken builds, CI, and dependencies
-├── docx/                   # python-docx template filling, split-run repair, tables
-├── media-ffmpeg/           # Video/audio stream processing, cuts, silence detection
-├── optimization-modeling/  # LP/MILP, scheduling, routing (scipy, cvxpy, OR-Tools)
-├── pdf/                    # Text/table extraction, form filling, OCR fallbacks
-├── pptx/                   # PowerPoint generation, slide layouts, run-level styling
-├── scope-safety/           # Operational boundaries for user environments & permissions
-├── signal-timeseries/      # FFT, filtering, detrending, and peak finding (numpy/scipy)
-├── tabular-data/           # pandas joins, dtype pitfalls, exact-output formatting
-├── task-discipline/        # Verification checklist for exact deliverable matching
-└── xlsx/                   # openpyxl formula preservation, cell type discipline
+```text
+├── library/skills/                 # Track 1 Frozen Static Library (11 skills, 5,865 words)
+│   ├── build-repair/               # Reproducing, classifying, and proving minimal build fixes
+│   ├── docx/                       # python-docx split-run replacement, nested tables, conditionals
+│   ├── media-ffmpeg/               # ffmpeg/ffprobe stream surgery, filtergraphs, silence detection
+│   ├── optimization-modeling/      # LP/MILP formulation, solver status checks (scipy, PuLP, OR-Tools)
+│   ├── pdf/                        # pypdf/pdfplumber text & table extraction, form filling, OCR fallback
+│   ├── pptx/                       # python-pptx run styling, EMUs, buAutoNum XML, working-set slides
+│   ├── scope-safety/               # One-way-door verification & prompt-injection immunity
+│   ├── signal-timeseries/          # FFT, filtering, detrending, peak finding (numpy/scipy)
+│   ├── tabular-data/               # pandas join hygiene, dtype pitfalls, exact output formatting
+│   ├── task-discipline/            # Deliverable contract extraction & independent verification
+│   └── xlsx/                       # openpyxl formula preservation, data_only=False discipline
+├── track2/                         # Track 2 Epistemic Meta-Skill (self-gen / verify-retry)
+│   ├── DESIGN.md                   # Source-derived interface contract & Epistemic Ledger design
+│   └── meta/skill-creator/         # Mountable skill-creator meta-skill + scripts/verify_claims.py
+├── src/epistemic_skills/           # Python CLI linter & deterministic packager
+├── reports/                        # Canonical paired-bootstrap lift reports (JSON + Markdown)
+├── mock-safety/                    # 3 ClawsBench-style side-effect tasks with oracle & verifier
+└── writeup/                        # Post-mortem & Track 1 static writeup
 ```
 
 ---
 
-## 🛠️ CLI Quickstart
+## CLI Quickstart
 
-Install locally with `uv` or `pip`:
+Install locally:
 
 ```bash
-git clone https://github.com/closestfriend/skill-lift.git
-cd skill-lift
-pip install -e ".[dev]"
+pip install -e .
 ```
 
-### 1. Lint your skills against the 6 Authoring Laws
+### 1. Lint skills against the 6 Authoring Laws & Track 2 Calibration Gate
 ```bash
-skill-lift lint library/skills
+# Lint Track 1 static library (11 skills)
+skill-lift lint library/skills --verbose
+
+# Lint Track 2 meta-skill (skill-creator)
+skill-lift lint track2/meta --verbose
+
+# Emit machine-readable JSON diagnostics
+skill-lift lint library/skills --json
 ```
 
-### 2. List all skills and their Epistemic Integrity scores
+### 2. Run the standalone Track 2 claim verifier inside `self-gen` loops
 ```bash
-skill-lift list
+python3 track2/meta/skill-creator/scripts/verify_claims.py track2/meta/skill-creator library/skills
 ```
 
-### 3. Build a bitwise-deterministic release artifact
+### 3. Build deterministic release archives
 ```bash
 skill-lift package --library library/skills --version 1.0.0 --out dist
 ```
-Generates `dist/skills-v1.0.0.zip`, `dist/manifest.json`, and `dist/RELEASE-CERTIFICATE.md` with SHA256 verification.
 
 ---
 
-## 🚀 CI/CD Release Pipeline
-
-This repo includes GitHub Actions workflows for continuous verification and automated releases:
-- **`.github/workflows/ci.yml`**: Runs `pytest`, validates all skills with `skill-lift lint`, and enforces build reproducibility on every commit and pull request.
-- **`.github/workflows/release.yml`**: Triggered by git tags (`git tag v1.0.0 && git push origin v1.0.0`), automatically compiling the deterministic zip, computing SHA256 hashes, and publishing a GitHub Release with certified release notes.
-
----
-
-## 📜 License
+## License
 
 Apache License 2.0. Copyright 2026 Hunter Noah Karman.
