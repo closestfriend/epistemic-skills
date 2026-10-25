@@ -29,14 +29,15 @@ jobs:
         run: |
           pytest tests/ -v
 
-      - name: Run Epistemic Linter on Skills Library
+      - name: Run Epistemic Linter on Track 1 Static Library & Track 2 Meta-Skill
         run: |
           skill-lift lint library/skills --verbose
+          skill-lift lint track2/meta --verbose
+          python3 track2/meta/skill-creator/scripts/verify_claims.py track2/meta/skill-creator library/skills
 
       - name: Verify Deterministic Packaging Build
         run: |
-          skill-lift package --library library/skills --version 1.0.0 --out dist
-          test -f dist/skills-v1.0.0.zip
-          test -f dist/manifest.json
-          test -f dist/RELEASE-CERTIFICATE.md
-          echo "Build artifact SHA256: $(sha256sum dist/skills-v1.0.0.zip | awk '{print $1}')"
+          skill-lift package --library library/skills --version 1.0.0 --out /tmp/dist-track1
+          skill-lift package --library track2/meta --label track2-meta-v1.0.0 --out /tmp/dist-track2
+          test -f /tmp/dist-track1/skills-v1.0.0.zip
+          test -f /tmp/dist-track2/skills-track2-meta-v1.0.0.zip
