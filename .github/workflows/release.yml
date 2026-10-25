@@ -1,0 +1,77 @@
+name: Release Pipeline & Artifact Distribution
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version tag (e.g. 1.0.0)"
+        required: true
+        default: "1.0.0"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Determine Version
+        id: get_version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            TAG="${{ github.ref_name }}"
+            echo "VERSION=${TAG#v}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Deterministic Release Artifacts
+        run: |
+          skill-lift package --library library/skills --version ${{ steps.get_version.outputs.VERSION }} --out dist
+
+      - name: Generate Release Notes
+        id: notes
+        run: |
+          cat << 'EOF' > release_notes.md
+          ## Epistemic Skills Library Release
+
+          This release contains the verified 11-skill agent library, certified against the 6 Authoring Laws derived from the Agent Skill Lift campaign.
+
+          ### Measured Lift Benchmarks
+          - **Claude Haiku Dev Sweep:** **15.4% → 30.8% (+15.4pp)** (paired bootstrap n=1000)
+          - **Offer Letter Generator (docx):** **0/3 → 3/3** on Haiku; **0/2 → 2/2** on GLM 5.1 (causal lift via recursive walker snippets)
+          - **GPT-5.4-mini:** **~2× tool-call efficiency** (6–7 tool calls vs 13–16)
+          - **Safety Tasks:** **12/12 PASS** both arms, 0 over-refusals
+
+          ### Release Artifacts
+          - `skills-v${{ steps.get_version.outputs.VERSION }}.zip`: Deterministic skill library
+          - `manifest.json`: Library metadata, word counts, and integrity scores
+          - `RELEASE-CERTIFICATE.md`: SHA256 verification and authoring law receipts
+          EOF
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Epistemic Skills v${{ steps.get_version.outputs.VERSION }}"
+          body_path: release_notes.md
+          files: |
+            dist/skills-v${{ steps.get_version.outputs.VERSION }}.zip
+            dist/manifest.json
+            dist/RELEASE-CERTIFICATE.md
+          draft: false
+          prerelease: false
