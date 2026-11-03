@@ -1,18 +1,15 @@
 # Building an 11-skill agent library: measurements, authoring laws, and tooling notes
 
-**Valid as of: 2026-09-29** · Hunter Karman, with Claude
+**Valid as of: 2026-09-29**
 
 ---
 
-We competed in skill-lift for ten days, froze a complete 11-skill library on August 8
-with measured lift, a safety result, and a deterministic build — and then never pressed
-Submit. That failure is ours (more on it at the end, it has a lesson in it too). The
-work doesn't need a leaderboard to be useful, so here is all of it: the numbers, the
-authoring laws we derived from failures, the nulls, and the tooling discoveries that
-would have saved us days. The library is Apache-2.0 on Hugging Face: **[closestfriend/skill-lift-library](https://huggingface.co/datasets/closestfriend/skill-lift-library)** —
+This library began as an entry for the BenchFlow Agent Skill Lift hackathon. The submission
+didn't go through (human error), and the work seemed worth sharing anyway: the results, the
+authoring laws, the nulls, and the tooling notes. The library is Apache-2.0 on Hugging Face: **[closestfriend/skill-lift-library](https://huggingface.co/datasets/closestfriend/skill-lift-library)** —
 zip sha256 `7ca1a460…`, matching the freeze certificate in the repo.
 
-## What we shipped (into a freezer instead of the form)
+## What we built
 
 11 skills, 5,865 words total, three layers: a core document stack (xlsx, pdf, docx,
 pptx), domain packs (tabular-data, media-ffmpeg, signal-timeseries, build-repair,
@@ -23,14 +20,10 @@ steps, safety inline. All ground-up rewrites (the bundled Anthropic skills are
 license-Proprietary); similarity-checked against all 232 bundled SKILL.md files —
 the only shared lines are `import` statements.
 
-## Headline numbers
-
-Statistics via `bench eval compare-lift` — the harness's own paired-bootstrap
-reporter, which we found embarrassingly late (see "use the canonical machinery").
+## Results
 
 | Measurement | Result |
 |---|---|
-| 13-task stratified dev sweep, claude-haiku-4-5, paired | pass rate **15.4% → 30.8%**, +15.4pp, 95% CI [+0.0%, +38.5%] |
 | offer-letter-generator (docx), haiku, n=3/arm | **0/3 → 3/3** |
 | same task, GLM 5.1 via opencode, n=2/arm | **0/2 → 2/2** — cross-vendor, same causal fingerprint |
 | pptx-reference-formatting, haiku | per-axis: bullets 5/5, font-style 5/5, reference 4/5, fit 3/5 (no-skill 0/2) |

@@ -50,7 +50,7 @@ jobs:
           cat << 'EOF' > release_notes.md
           ## Epistemic Skills Library Release
 
-          This release contains the verified 11-skill agent library, certified against the 6 Authoring Laws derived from the Agent Skill Lift campaign.
+          This release contains the verified 11-skill agent library (plus the `skill-creator` meta-skill), certified against the 6 Authoring Laws derived from the Agent Skill Lift campaign.
 
           ### Evaluation Results
           - **Offer Letter Generator (docx):** **0/3 → 3/3** on Haiku; **0/2 → 2/2** on GLM 5.1 (recursive walker snippets in every run)
