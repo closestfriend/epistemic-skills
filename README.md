@@ -8,7 +8,7 @@
 
 **Epistemic Skills** is an empirical agent skill library, meta-skill (`skill-creator`), linter, and deterministic packager for AI coding agents.
 
-Built during the Kaggle [BenchFlow – Agent Skill Lift](https://www.kaggle.com/competitions/skill-lift) campaign, this repository moves `SKILL.md` authoring from prompt intuition to an **empirical discipline of causal lift, per-axis trajectory autopsy, and Epistemic Ledger claim gating**.
+Built during the Kaggle [BenchFlow – Agent Skill Lift](https://www.kaggle.com/competitions/skill-lift) campaign, this repository moves `SKILL.md` authoring from prompt intuition to an **empirical discipline of paired evaluation, per-axis trajectory autopsy, and Epistemic Ledger claim gating**.
 
 - **Post-Mortem & Empirical Findings**: [`writeup/postmortem-community.md`](writeup/postmortem-community.md)
 - **Track 1 Static Freeze Certificate**: [`FREEZE-CERTIFICATE.md`](FREEZE-CERTIFICATE.md) (`dist/submission-v02.zip`, SHA256 `7ca1a460…`)
@@ -111,4 +111,4 @@ skill-lift package --library library/skills --version 1.0.0 --out dist
 
 ## License
 
-Apache License 2.0. Copyright 2026 Hunter Noah Karman.
+Apache License 2.0. See [LICENSE](LICENSE).
