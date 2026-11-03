@@ -1,4 +1,4 @@
-# We measured everything and never pressed Submit: a full post-mortem of an 11-skill library
+# Building an 11-skill agent library: measurements, authoring laws, and tooling notes
 
 **Valid as of: 2026-09-29** · Hunter Karman, with Claude
 

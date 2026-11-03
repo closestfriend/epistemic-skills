@@ -52,11 +52,10 @@ jobs:
 
           This release contains the verified 11-skill agent library, certified against the 6 Authoring Laws derived from the Agent Skill Lift campaign.
 
-          ### Measured Lift Benchmarks
-          - **Claude Haiku Dev Sweep:** **15.4% → 30.8% (+15.4pp)** (paired bootstrap n=1000)
-          - **Offer Letter Generator (docx):** **0/3 → 3/3** on Haiku; **0/2 → 2/2** on GLM 5.1 (causal lift via recursive walker snippets)
+          ### Evaluation Results
+          - **Offer Letter Generator (docx):** **0/3 → 3/3** on Haiku; **0/2 → 2/2** on GLM 5.1 (recursive walker snippets in every run)
           - **GPT-5.4-mini:** **~2× tool-call efficiency** (6–7 tool calls vs 13–16)
-          - **Safety Tasks:** **12/12 PASS** both arms, 0 over-refusals
+          - **Safety Tasks (3 mock tasks):** **12/12 PASS** both arms, 0 over-refusals
 
           ### Release Artifacts
           - `skills-v${{ steps.get_version.outputs.VERSION }}.zip`: Deterministic skill library

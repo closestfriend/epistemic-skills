@@ -3,7 +3,7 @@
 [![CI](https://github.com/closestfriend/skill-lift/actions/workflows/ci.yml/badge.svg)](https://github.com/closestfriend/skill-lift/actions)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
-[![Measured Lift: +15.4pp](https://img.shields.io/badge/Measured_Lift-+15.4pp-success.svg)](reports/)
+[![Evaluated: BenchFlow](https://img.shields.io/badge/Evaluated-BenchFlow-success.svg)](reports/)
 [![Skills: 11 + 1 Meta](https://img.shields.io/badge/Skills-11_Static_+_1_Meta-orange.svg)](library/skills/)
 
 **Epistemic Skills** is an empirical agent skill library, meta-skill (`skill-creator`), linter, and deterministic packager for AI coding agents.
@@ -17,19 +17,18 @@ Built during the Kaggle [BenchFlow – Agent Skill Lift](https://www.kaggle.com/
 
 ---
 
-## Measured Benchmark Results
+## Evaluation Results
 
-Evaluated on the official BenchFlow harness with `bench eval compare-lift` (paired bootstrap, $n=1000$):
+Evaluated on the BenchFlow harness across Claude Haiku 4.5, GLM 5.1, and GPT-5.4-mini:
 
-| Benchmark & Model | Baseline (`no-skill`) | With Epistemic Skills | Lift / Delta | Causal Verification |
-|---|---:|---:|---:|---|
-| **13-Task Stratified Dev Sweep** (Claude Haiku 4.5) | 15.4% | **30.8%** | **+15.4pp** | 95% CI `[+0.0%, +38.5%]` (`reports/devsweep-haiku-lift.md`) |
-| **Offer Letter Generator** (`docx`, Haiku 4.5) | 0/3 | **3/3** | **+100%** | Recursive `all_paragraphs` walker snippet used verbatim |
-| **Offer Letter Generator** (`docx`, GLM 5.1) | 0/2 | **2/2** | **+100%** | Cross-vendor transfer with identical causal fingerprint |
-| **PowerPoint Reference Formatting** (`pptx`, Haiku 4.5) | 0/2 | **Bullets 5/5, Font 5/5, Ref 4/5** | **Per-axis conversion** | XML `a:buAutoNum` snippet + free-dimension geometry rule |
-| **Frontier Efficiency** (GPT-5.4-mini) | 13–16 calls (3.7m) | **6–7 calls (2.5m)** | **~2× Faster** | Ceiling pass rate both arms; ~50% fewer tool calls |
-| **Off-Domain Sweep** (13 tasks, GLM 5.1) | 16.7% | **16.7%** | **0 Harm** | Inert off-domain under full-context skill injection |
-| **Safety Invariants** (3 side-effect tasks) | 12/12 PASS | **12/12 PASS** | **0 Violations** | Zero policy violations and zero over-refusals |
+| Benchmark & Model | Without skills | With Epistemic Skills | Notes |
+|---|---:|---:|---|
+| **Offer Letter Generator** (`docx`, Haiku 4.5) | 0/3 | **3/3** | Recursive `all_paragraphs` walker snippet used verbatim |
+| **Offer Letter Generator** (`docx`, GLM 5.1) | 0/2 | **2/2** | Same pattern on a second vendor |
+| **PowerPoint Reference Formatting** (`pptx`, Haiku 4.5) | 0/2 | per-axis | Bullets 5/5 · Font 5/5 · Ref 4/5 · Fit 3/5; `a:buAutoNum` snippet + free-dimension geometry rule |
+| **Frontier Efficiency** (GPT-5.4-mini) | 13–16 calls (3.7m) | **6–7 calls (2.5m)** | Same pass rate both arms; ~50% fewer tool calls |
+| **Off-Domain Sweep** (GLM 5.1) | unchanged | unchanged | Inert off-domain under full-context skill injection |
+| **Safety Invariants** (3 mock side-effect tasks) | 12/12 PASS | **12/12 PASS** | 0 violations, 0 over-refusals |
 
 ---
 
